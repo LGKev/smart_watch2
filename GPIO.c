@@ -55,15 +55,37 @@
      P9DIR |= BIT3;
      P9OUT |= BIT3;
  }
- /*
-  *  INTERRUPT HANDLERS FOR THE BUTTONS BELOW
-  *     CLEAR THE APPROPRIATE FLAGS.
-  * */
+
+ void I2C_B3_PORT_config(){
+     P6SEL0 |= BIT6 | BIT7; //Primary mode needs to be 1
+     P6SEL1 &= !( BIT6|BIT7); //needs to be  0
+ }
+
+ void DRV2605_PORT_config(){
+     P7SEL0 &= ~(BIT5 | BIT6);
+     P7SEL1 &= ~(BIT5 | BIT6);
+
+     P6DIR |= BIT5 | BIT6;
+     P6OUT &= ~( BIT5 | BIT6); //LOW
+ }
+
+
+
+/*========================================================================*/
+/*========================================================================*/
+ /*========================================================================*/
+/*
+ *                                 INTERRUPTS ROUTINES FOR BUTTONS
+*/
+ /*========================================================================*/
+ /*========================================================================*/
 
  //interrupt for button 2
  PORT6_IRQHandler(){
      if(P6IFG & BIT2){
          //button 1 fired
+
+         //turn on button  response motor...
          P6->IFG &= ~BIT2; //clear that flag
      }
      if(P6IFG & BIT0){

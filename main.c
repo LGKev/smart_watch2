@@ -28,6 +28,8 @@ void main(void)
 	button_init(); //works
 	heartbeat_led_init(); //works
 
+	//lets get the motor driver working!
+
 
 	__enable_interrupts();
 
