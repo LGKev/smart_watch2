@@ -10,7 +10,9 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./DRV2605.obj" \
 "./GPIO.obj" \
+"./I2C.obj" \
 "./RTC.obj" \
 "./main.obj" \
 "./startup_msp432p401r_ccs.obj" \
@@ -157,8 +159,9 @@ watch_v2.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "GPIO.obj" "RTC.obj" "main.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" 
+	-$(RM) "DRV2605.obj" "GPIO.obj" "I2C.obj" "RTC.obj" "main.obj" "startup_msp432p401r_ccs.obj" "system_msp432p401r.obj" 
 	-$(RM) "GPIO.d" "RTC.d" "main.d" "startup_msp432p401r_ccs.d" "system_msp432p401r.d" 
+	-$(RM) "DRV2605.d" "I2C.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

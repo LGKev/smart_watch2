@@ -1,6 +1,8 @@
 #include "msp.h"
 #include "GPIO.h"
 #include "RTC.h"
+#include "I2C.h"
+#include "DRV2605.h"
 
 
 /**
@@ -24,18 +26,22 @@ void main(void)
 
 
 
-	RTC_init(0, 0, 0, 0, 0, 0, 0, 0); //will pass in time from compiler...? or from user... anyway it basically works.
-	button_init(); //works
-	heartbeat_led_init(); //works
+	//RTC_init(0, 0, 0, 0, 0, 0, 0, 0); //will pass in time from compiler...? or from user... anyway it basically works.
+//	button_init(); //works
+	//heartbeat_led_init(); //works
+
 
 	//lets get the motor driver working!
-
+	I2C_B3_init();
 
 	__enable_interrupts();
 
-	uint16_t delay;
+//	uint8_t delay = 0;
 
 	while(1){
+//	    send_Data_TX(0x01, delay, 1);
+	    start_Transmission(0XAA);
+	 //   delay++;
 	}
 
 

@@ -12,6 +12,8 @@ main.obj: C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/CMSIS/cmsis_compil
 main.obj: C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/system_msp432p401r.h
 main.obj: ../GPIO.h
 main.obj: ../RTC.h
+main.obj: ../I2C.h
+main.obj: ../DRV2605.h
 
 ../main.c: 
 C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/msp.h: 
@@ -25,3 +27,5 @@ C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/CMSIS/cmsis_compiler.h:
 C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/system_msp432p401r.h: 
 ../GPIO.h: 
 ../RTC.h: 
+../I2C.h: 
+../DRV2605.h: 

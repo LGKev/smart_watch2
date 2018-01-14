@@ -57,8 +57,17 @@
  }
 
  void I2C_B3_PORT_config(){
-     P6SEL0 |= BIT6 | BIT7; //Primary mode needs to be 1
-     P6SEL1 &= !( BIT6|BIT7); //needs to be  0
+ //    P6SEL0 |= BIT6 | BIT7; //Primary mode needs to be 1
+  //   P6SEL1 &= ~( BIT6|BIT7); //needs to be  0
+     //OR IS IT SECONDARY MODE!?
+//ITS SECONDARY MODE!!! ALWAY SREAD THE DATA SHEET
+     P6SEL1 |= BIT6 | BIT7; //Primary mode needs to be 1
+     P6SEL0 &= ~( BIT6|BIT7); //needs to be  0
+
+     P6DIR &= ~(BIT6|BIT7);
+     P6REN |= (BIT6|BIT7);
+     P6OUT |= (BIT6|BIT7);
+
  }
 
  void DRV2605_PORT_config(){
