@@ -26,9 +26,9 @@ void main(void)
 
 
 
-	//RTC_init(0, 0, 0, 0, 0, 0, 0, 0); //will pass in time from compiler...? or from user... anyway it basically works.
-//	button_init(); //works
-	//heartbeat_led_init(); //works
+	RTC_init(0, 0, 0, 0, 0, 0, 0, 0); //will pass in time from compiler...? or from user... anyway it basically works.
+	button_init(); //works
+	heartbeat_led_init(); //works
 
 
 	//lets get the motor driver working!
@@ -36,13 +36,18 @@ void main(void)
 
 	__enable_interrupts();
 
-//	uint8_t delay = 0;
+	uint8_t delay = 0;
 
 	while(1){
 //	    send_Data_TX(0x01, delay, 1);
-	    start_Transmission(0XAA);
-	 //   delay++;
+	    start_Transmission(0b11111111);
+	    for(delay = 0 ; delay<3000; delay++);
 	}
 
+	//TODO! set up the driver pin enable to be high, we need to do that first.
+	//before we can communicate.
+	//send_Data_TX(_slave_Address, _data, 1);
+
+	while(1);
 
 }
