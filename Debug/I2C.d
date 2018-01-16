@@ -11,7 +11,7 @@ I2C.obj: C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/CMSIS/core_cm4.h
 I2C.obj: C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/CMSIS/cmsis_compiler.h
 I2C.obj: C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/system_msp432p401r.h
 I2C.obj: ../I2C.h
-I2C.obj: ../GPIO.h
+I2C.obj: ../DRV2605.h
 
 ../I2C.C: 
 C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/msp.h: 
@@ -24,4 +24,4 @@ C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/CMSIS/core_cm4.h:
 C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/CMSIS/cmsis_compiler.h: 
 C:/Users/kwat1/Documents/ccsv7/ccs_base/arm/include/system_msp432p401r.h: 
 ../I2C.h: 
-../GPIO.h: 
+../DRV2605.h: 

@@ -1,6 +1,6 @@
 #include "msp.h"
 #include "I2C.h"
-#include "GPIO.h"
+#include "DRV2605.h"
 /*
  * I2C.C
  *
@@ -9,6 +9,7 @@
  *		
  *		@brief this is essentially just for the haptic motor driver DRV2605
  */
+
 
 /*@brief: this is for the I2C peripheral B3, the pins are 80 and 81 of the QFN package
  *          SDA is p6.6 and SCL is p6.7
@@ -27,7 +28,8 @@ void I2C_B3_init(){
      EUSCI_B3->CTLW0 |=UCSSEL__SMCLK; //we'll use the system clock
      //we are transmitting .. but wait what about the drv closed loop feedback? i think it changes
      EUSCI_B3->BRW = 0X0; //pre scaler for clock, might need this if the speed of the driver is limited
-     //TODO: come back to this looking for the i2c change of transmit receive
+     //TODO: come back to this looking for the i2c change of transmit receive? what do you mean?
+
      I2C_B3_PORT_config();
      EUSCI_B3->CTLW0 &= ~UCSWRST; //clear
 
@@ -35,6 +37,7 @@ void I2C_B3_init(){
      EUSCI_B3->IE |= UCNACKIE | UCCLTOIE | UCRXIE0| UCTXIE0; //nack recieved, clock low time out, RX0
      NVIC_EnableIRQ(EUSCIB3_IRQn);
 }
+
 
 
 
@@ -99,8 +102,9 @@ void EUSCIB3_IRQHandler(){
     if(UCB3IFG & UCTXIFG){
         UCB3IFG &=~UCTXIFG;
 
-//        UCB1CTLW0 |= UCTXSTP;
+      UCB1CTLW0 |= UCTXSTP;
     }
+
 
     if(UCB3IFG & UCNACKIFG){
               UCB3IFG &=~UCNACKIFG;
@@ -109,6 +113,4 @@ void EUSCIB3_IRQHandler(){
               //start command again!
              EUSCI_B3->CTLW0 |= UCTXSTT;
           }
-
-
 }

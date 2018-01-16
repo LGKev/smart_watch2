@@ -10,6 +10,32 @@
  */
 
 
+ void DRV2605_PORT_config(){
+     /* Enable: P7.5
+      * PWM: P7.6
+      * */
+     P7SEL0 &= ~(BIT5 | BIT6);
+     P7SEL1 &= ~(BIT5 | BIT6);
+
+     P7DIR |= BIT5 | BIT6;
+     P7OUT &= ~( BIT6); //PWM low
+     P7OUT |= BIT5; //enable high.
+ }
+
+ void I2C_B3_PORT_config(){
+  //    P6SEL0 |= BIT6 | BIT7; //Primary mode needs to be 1
+   //   P6SEL1 &= ~( BIT6|BIT7); //needs to be  0
+      //OR IS IT SECONDARY MODE!?
+ //ITS SECONDARY MODE!!! ALWAY SREAD THE DATA SHEET
+      P6SEL1 |= BIT6 | BIT7; //Primary mode needs to be 1
+      P6SEL0 &= ~( BIT6|BIT7); //needs to be  0
+
+      P6DIR &= ~(BIT6|BIT7);
+      P6REN |= (BIT6|BIT7);
+      P6OUT |= (BIT6|BIT7);
+  }
+
+
 /* init sequence from data sheet
  *  *     1) wait 250 uS before commands can be sent
  *     2) EN set high, during or after 250 wait
@@ -21,10 +47,24 @@
  *              7) put device in standby mode, or EN is low
  * */
 void DRV2605_init(){
+    //ENABLE DEVICE
+    DRV2605_PORT_config();
+
     // the address of the device is
-    EUSCI_B3 -> I2CSA = DRV2605_ADDRESS01; //not defined
+    EUSCI_B3 -> I2CSA = DRV2605_ADDRESS01_WRITE;  //default: 0x5A
 
     I2C_B3_init();
 
-    EUSCI_B3->TXBUF = 0xAA; //get out of stand by?
+    DRV2605_Enable();
+
+
+    //TODO need to do the calibration here.
+
+}
+
+void DRV2605_Enable(){
+    P7OUT |= BIT5;
+}
+void DRV2605_Disable(){
+    P7OUT &= ~BIT5;
 }

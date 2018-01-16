@@ -38,9 +38,16 @@ void main(void)
 
 	uint8_t delay = 0;
 
+	 DRV2605_init();
+
 	while(1){
 //	    send_Data_TX(0x01, delay, 1);
-	    start_Transmission(0b11111111);
+	  //  start_Transmission(0x5A);
+
+start_Transmission(0x5A);
+//stop_Transmission(0x5A);
+
+
 	    for(delay = 0 ; delay<3000; delay++);
 	}
 
